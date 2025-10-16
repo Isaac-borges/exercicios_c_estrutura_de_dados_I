@@ -3,6 +3,7 @@
         "stdlib.h": "c",
         "static_queue.h": "c",
         "stdio.h": "c",
-        "pilha.h": "c"
+        "pilha.h": "c",
+        "iostream": "cpp"
     }
 }

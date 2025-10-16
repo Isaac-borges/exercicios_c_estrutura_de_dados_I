@@ -25,13 +25,6 @@ class LinkedList{
             end = NULL;
             size = 0;
         };
-
-        // void addFirst(int matricula, string nome) {
-        //     No *node = new No(matricula, nome);
-        //     node->next = this->begin;
-        //     this->begin = node;
-        //     this->size++;
-        // };
         
         void addFirst(int matricula, string nome) {
             No *node = new No(matricula, nome);
@@ -126,6 +119,45 @@ class LinkedList{
 
             return copy;
         }
+
+        void removeByMatricula(int matricula) {
+            if (begin == NULL) {
+                cout << "\nLista vazia. Nada a remover.\n";
+                return;
+            }
+
+            No *current = begin;
+            No *previous = NULL;
+
+            while (current != NULL && current->matricula_aluno != matricula) {
+                previous = current;
+                current = current->next;
+            }
+
+            if (current == NULL) {
+                cout << "\nMatricula " << matricula << " nao encontrada.\n";
+                return;
+            }
+
+            // Caso 1: remover o primeiro elemento
+            if (current == begin) {
+                begin = begin->next;
+                if (current == end) end = NULL; // era o único elemento
+            }
+            // Caso 2: remover o último elemento
+            else if (current == end) {
+                end = previous;
+                end->next = NULL;
+            }
+            // Caso 3: remover elemento do meio
+            else {
+                previous->next = current->next;
+            }
+
+            delete current;
+            size--;
+            cout << "\nMatricula " << matricula << " removida com sucesso.\n";
+        }
 };
 
 int main() {
@@ -141,25 +173,25 @@ int main() {
     
     L->print();
     cout << "------------------\n";
-    L->invert();
-    L->print();
-
-    L->search(1);
-    L->search(5);
-    L->search(8);
-    L->search(10);
-    cout << "------------------\n2n\n";
-    LinkedList *copy_2n= L->invertCopy_2n(); 
-    copy_2n->print();
-    cout << "------------------\nL\n";
-    L->print();
-    cout << "------------------\nn\n";
-    LinkedList *copy_n = L->invertCopy_n(); 
-    copy_n->print();
-    cout << "------------------\n";
-    copy_n->addFirst(10, "Nome");
     
+    // cout << "------------------\n2n\n";
+    // LinkedList *copy_2n= L->invertCopy_2n(); 
+    // copy_2n->print();
+    // cout << "------------------\nL\n";
+    // L->print();
+    // cout << "------------------\nn\n";
+    // LinkedList *copy_n = L->invertCopy_n(); 
+    // copy_n->print();
+    // cout << "------------------\n";
+    // copy_n->addFirst(10, "Nome");
+    
+    L->removeByMatricula(1);
+    L->removeByMatricula(5);
+    L->removeByMatricula(7);
     L->print();
+    L->removeByMatricula(7);
+    L->print();
+    L->removeByMatricula(10);
 
     return 0;
 }
