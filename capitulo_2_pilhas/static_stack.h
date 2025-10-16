@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-typedef char Itemp;
+typedef int Itemp;
 
 typedef struct _static_stack StaticStack;
 
